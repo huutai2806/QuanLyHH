@@ -96,28 +96,28 @@ public class Product extends JFrame {
 		panel.add(txtLoaiSP);
 		
 		textField = new JTextField();
-		textField.setBounds(62, 11, 149, 20);
+		textField.setBounds(91, 11, 149, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(62, 56, 149, 20);
+		textField_1.setBounds(91, 56, 149, 20);
 		panel.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(366, 11, 149, 20);
+		textField_2.setBounds(378, 11, 149, 20);
 		panel.add(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(366, 56, 149, 20);
+		textField_3.setBounds(378, 56, 149, 20);
 		panel.add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(366, 95, 149, 20);
+		textField_4.setBounds(378, 95, 149, 20);
 		panel.add(textField_4);
 		
 		JPanel panel_1 = new JPanel();
@@ -149,6 +149,7 @@ public class Product extends JFrame {
 		JButton btnGhi = new JButton("Ghi");
 	    btnGhi.setBounds(71, 220, 89, 23);
 	    contentPane.add(btnGhi);
+	    //nút ghi thông tin
 	    btnGhi.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -179,6 +180,7 @@ public class Product extends JFrame {
 				
 			}
 	    });
+	    // nút không-không thông tin sản phẩm
 	    JButton btnKhong = new JButton("Không");
 	    btnKhong.setBounds(196, 220, 89, 23);
 	    contentPane.add(btnKhong);
@@ -223,8 +225,6 @@ public class Product extends JFrame {
 	            }
 	        }
 	    });
-
-	    // Nút "Xóa" - Xóa sản phẩm
 	    JButton btnXoa = new JButton("Xóa");
 	    btnXoa.setBounds(438, 220, 89, 23);
 	    contentPane.add(btnXoa);
@@ -233,7 +233,6 @@ public class Product extends JFrame {
 	        public void actionPerformed(ActionEvent e) {
 	            int selectedRow = tableSP.getSelectedRow();
 	            if (selectedRow >= 0) {
-	                // Xoá dòng được chọn từ bảng hiển thị trên giao diện
 	                dfTableModel.removeRow(selectedRow);
 	            }
 	        }
