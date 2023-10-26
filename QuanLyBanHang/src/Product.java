@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -58,6 +60,7 @@ public class Product extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Product() throws SQLException {
+		setTitle("Sản Phẩm");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 640, 480);
 		contentPane = new JPanel();
@@ -145,11 +148,22 @@ public class Product extends JFrame {
 		} 
 		tableSP = new JTable();
 		tableSP.setModel(dfTableModel);
+		tableSP.getSelectionModel().addListSelectionListener((ListSelectionListener) new ListSelectionListener() {
+		    public void valueChanged(ListSelectionEvent event) {
+		        if (!event.getValueIsAdjusting() && tableSP.getSelectedRow() != -1) {
+		            int selectedRow = tableSP.getSelectedRow();
+		            textField.setText((String) dfTableModel.getValueAt(selectedRow, 0));
+		            textField_2.setText((String) dfTableModel.getValueAt(selectedRow, 1));
+		            textField_1.setText(dfTableModel.getValueAt(selectedRow, 2).toString());
+		            textField_3.setText((String) dfTableModel.getValueAt(selectedRow, 3));
+		            textField_4.setText((String) dfTableModel.getValueAt(selectedRow, 4));
+		        }
+		    }
+		});
 		scrollPane.setViewportView(tableSP);
 		JButton btnGhi = new JButton("Ghi");
 	    btnGhi.setBounds(71, 220, 89, 23);
 	    contentPane.add(btnGhi);
-	    //nút ghi thông tin
 	    btnGhi.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -180,7 +194,6 @@ public class Product extends JFrame {
 				
 			}
 	    });
-	    // nút không-không thông tin sản phẩm
 	    JButton btnKhong = new JButton("Không");
 	    btnKhong.setBounds(196, 220, 89, 23);
 	    contentPane.add(btnKhong);
@@ -194,7 +207,6 @@ public class Product extends JFrame {
 	            textField_4.setText("");
 	        }
 	    });
-	    // Nút "Sửa" - Sửa thông tin sản phẩm
 	    JButton btnSua = new JButton("Sửa");
 	    btnSua.setBounds(317, 220, 89, 23);
 	    contentPane.add(btnSua);
@@ -209,14 +221,12 @@ public class Product extends JFrame {
 	                String xuatXu = textField_3.getText();
 	                String loaiSP = textField_4.getText();
 
-	                // Cập nhật dữ liệu trong bảng hiển thị trên giao diện
 	                dfTableModel.setValueAt(maSP, selectedRow, 0);
 	                dfTableModel.setValueAt(tenSP, selectedRow, 1);
 	                dfTableModel.setValueAt(donGia, selectedRow, 2);
 	                dfTableModel.setValueAt(xuatXu, selectedRow, 3);
 	                dfTableModel.setValueAt(loaiSP, selectedRow, 4);
 
-	                // Đặt lại các JTextField về trạng thái rỗng
 	                textField.setText("");
 	                textField_2.setText("");
 	                textField_1.setText("");
@@ -233,6 +243,7 @@ public class Product extends JFrame {
 	        public void actionPerformed(ActionEvent e) {
 	            int selectedRow = tableSP.getSelectedRow();
 	            if (selectedRow >= 0) {
+	            	 String maSP = (String) dfTableModel.getValueAt(selectedRow, 0);
 	                dfTableModel.removeRow(selectedRow);
 	            }
 	        }
